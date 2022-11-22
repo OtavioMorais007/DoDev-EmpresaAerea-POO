@@ -256,10 +256,10 @@ function CadastrarPassagem() {
             for (let j = 0; j < voos.length; j++) {
                 if (voos[j].getNumero() == escolha) {
                     escolha = voos[j]
-                    if (contador > 0) {
+                    if (contador > 1) {
                         for (let j = 0; j < voos.length; j++) {
                             let voo = passagensaereas[j].getVoo()
-                            if (voos[index2].getNumero() == voo.getNumero() && assento == passagensaereas[j].getAssento()) {
+                            if (voos[j].getNumero() == voo.getNumero() && assento == passagensaereas[j].getAssento()) {
                                 alert("Este assento neste voo já foi escolhido por favor insira outro: ")
                                 assento = prompt("Insira o assento desejado: ")
                             }
@@ -274,7 +274,7 @@ function CadastrarPassagem() {
                 escolha = prompt("Insira o número do voo desejado: ")
             }
         }
-        
+
         let primeiraclasse = prompt("Insira se o assento é primeira clase: true/false")
         let valor = parseInt(prompt("Insira o valor da passagem: "))
         let passageiro = prompt("Insira o titular da passagem: ")
@@ -289,11 +289,12 @@ function CadastrarPassagem() {
         })
         if (i == 0) {
             passagemida = new PassagemAerea(assento, primeiraclasse, valor, passageiro, escolha)
+            passagensaereas.push(passagemida)
         } else {
             passagemvolta = new PassagemAerea(assento, primeiraclasse, valor, passageiro, escolha)
+            passagensaereas.push(passagemvolta)
         }
     }
-    passagensaereas.push(passagemida, passagemvolta)
 }
 
 function CadastrarNome() {

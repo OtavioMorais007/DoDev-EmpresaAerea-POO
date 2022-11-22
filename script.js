@@ -289,6 +289,25 @@ function CadastrarPassagem() {
     passagensaereas.push(passagemida, passagemvolta)
 }
 
+function CadastrarNome(){
+    let nome = prompt("Insira o nome do cliente: ")
+    let cpf = prompt("Insira o CPF do cliente: ")
+    let datadenascimento = prompt("Insira a data de nascimento do cliente: (dd/mm/aaaa)")
+    let cliente = new Cliente(nome, cpf, datadenascimento)
+    clientes.push(cliente)
+}
+
+function CadastrarEmpresa(){
+    let empresa = prompt("Informe o nome da empresa: ")
+    let numero = prompt("Informe o número do voo: ")
+    let data = prompt("Informe a data do voo: (dd/mm/aaaa/)")
+    let horario = prompt("Informe o horário do voo: ")
+    let localpartida = prompt("Informe o local de partida do voo: ")
+    let localdestino = prompt("Informe o local de destino do voo: ")
+    let voo = new Voo(empresa, numero, data, horario, localpartida, localdestino)
+    voos.push(voo)
+}
+
 let posicao
 let passagemida
 let passagemvolta
@@ -303,21 +322,10 @@ while (continuar == true) {
 
     switch (opcao) {
         case "1":
-            let nome = prompt("Insira o nome do cliente: ")
-            let cpf = prompt("Insira o CPF do cliente: ")
-            let datadenascimento = prompt("Insira a data de nascimento do cliente: (dd/mm/aaaa)")
-            let cliente = new Cliente(nome, cpf, datadenascimento)
-            clientes.push(cliente)
+            CadastrarNome()
             break;
         case "2":
-            let empresa = prompt("Informe o nome da empresa: ")
-            let numero = prompt("Informe o número do voo: ")
-            let data = prompt("Informe a data do voo: (dd/mm/aaaa/)")
-            let horario = prompt("Informe o horário do voo: ")
-            let localpartida = prompt("Informe o local de partida do voo: ")
-            let localdestino = prompt("Informe o local de destino do voo: ")
-            let voo = new Voo(empresa, numero, data, horario, localpartida, localdestino)
-            voos.push(voo)
+            CadastrarEmpresa()
             break;
         case "3":
             CadastrarPassagem()

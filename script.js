@@ -247,26 +247,34 @@ function CadastrarPassagem() {
     }
 
     for (let i = 0; i < 2; i++) {
+        let condicao = true
         let escolha = prompt("Insira o número do voo desejado: ")
         let assento = prompt("Insira o assento desejado: ")
-        voos.forEach(x => {
-            if (x.getNumero() == escolha) {
-                for (let index2 = 0; index2 < voos.length; index2++) {
-                    if (voos[index2].getNumero() == escolha) {
-                        escolha = voos[index2]
-                        if (contador > 0) {
-                            for (let j = 0; j < voos.length; j++) {
-                                let voo = passagensaereas[j].getVoo()
-                                if (voos[index2].getNumero() == voo.getNumero() && assento == passagensaereas[j].getAssento()) {
-                                    alert("Este assento neste voo já foi escolhido por favor insira outro: ")
-                                    assento = prompt("Insira o assento desejado: ")
-                                }
+        // Verificar se o voo escolhido existe,em caso positivo atribuir o objeto dele a escolha, e se o assento está disponível 
+        // caso tenha mais de uma passagem cadastrada.
+        while (condicao == true) {
+            for (let j = 0; j < voos.length; j++) {
+                if (voos[j].getNumero() == escolha) {
+                    escolha = voos[j]
+                    if (contador > 0) {
+                        for (let j = 0; j < voos.length; j++) {
+                            let voo = passagensaereas[j].getVoo()
+                            if (voos[index2].getNumero() == voo.getNumero() && assento == passagensaereas[j].getAssento()) {
+                                alert("Este assento neste voo já foi escolhido por favor insira outro: ")
+                                assento = prompt("Insira o assento desejado: ")
                             }
                         }
                     }
+                    contador++
+                    condicao = false
                 }
             }
-        })
+            if (condicao == true) {
+                alert("Voo não encontrado, insira novamente")
+                escolha = prompt("Insira o número do voo desejado: ")
+            }
+        }
+        
         let primeiraclasse = prompt("Insira se o assento é primeira clase: true/false")
         let valor = parseInt(prompt("Insira o valor da passagem: "))
         let passageiro = prompt("Insira o titular da passagem: ")
@@ -284,12 +292,11 @@ function CadastrarPassagem() {
         } else {
             passagemvolta = new PassagemAerea(assento, primeiraclasse, valor, passageiro, escolha)
         }
-        contador + 1
     }
     passagensaereas.push(passagemida, passagemvolta)
 }
 
-function CadastrarNome(){
+function CadastrarNome() {
     let nome = prompt("Insira o nome do cliente: ")
     let cpf = prompt("Insira o CPF do cliente: ")
     let datadenascimento = prompt("Insira a data de nascimento do cliente: (dd/mm/aaaa)")
@@ -297,7 +304,7 @@ function CadastrarNome(){
     clientes.push(cliente)
 }
 
-function CadastrarEmpresa(){
+function CadastrarVoo() {
     let empresa = prompt("Informe o nome da empresa: ")
     let numero = prompt("Informe o número do voo: ")
     let data = prompt("Informe a data do voo: (dd/mm/aaaa/)")
@@ -325,7 +332,7 @@ while (continuar == true) {
             CadastrarNome()
             break;
         case "2":
-            CadastrarEmpresa()
+            CadastrarVoo()
             break;
         case "3":
             CadastrarPassagem()
